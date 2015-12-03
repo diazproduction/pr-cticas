@@ -1,4 +1,4 @@
-# What to run first
+# The first time you setup the project
 
 ### On your terminal run:
 
