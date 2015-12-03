@@ -1,21 +1,39 @@
+var path = require('path');
+
 module.exports = {
-  entry: './src/custom/js/script.js',
+  context: path.resolve('src/custom/jsx'),
+  entry: './index.jsx',
   output: {
-    filename: "./prebuild/custom/js/bundle.js"
+    path: path.resolve('build/custom/js'),
+    publicPath: '/build/custom/js/',
+    filename: "bundle.js"
   },
   watch: true,
+
+  devServer: {
+    contentBase: 'src/custom/html'
+  },
 
   module: {
     loaders: [
       {
-        test: /\.es6$/,
+        test: /\.jsx$/,
         exclude:"./node_modules",
+        loader: "jsx-loader?insertPragma=React.DOM&harmony"
+      },
+      {
+        test: /\es6$/,
+        exclude: "./node-modules",
         loader: "babel-loader"
       }
     ]
   },
 
+  externals: {
+    'react': 'React'
+  },
+
   resolve: {
-    extensions: ['', '.js', '.es6']
+    extensions: ['', '.js', '.jsx', '.es6']
   }
 }
